@@ -1,0 +1,27 @@
+{
+  "name": "tplay",
+  "version": "0.0.1",
+  "description": "a torrent streaming thingy",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leon-4A6C/tplay.git"
+  },
+  "keywords": [
+    "torrent",
+    "stream"
+  ],
+  "author": "leon in 't Veld",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leon-4A6C/tplay/issues"
+  },
+  "homepage": "https://github.com/leon-4A6C/tplay#readme",
+  "dependencies": {
+    "electron": "^1.6.11",
+    "torrent-stream": "^1.0.3"
+  }
+}
