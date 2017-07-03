@@ -1,14 +1,19 @@
 nav
   position: fixed
   .topBar
+    height: 2em
     width: 100vw
     position: relative
-    z-index: 50
+    transition: margin-top 100ms linear
+    background: $primary-dark-color
+  .topBarClosed
+    margin-top: -2em
   .sideBar
     width: 100vw
     height: 100vh
     position: relative
     overflow: hidden
-    z-index: 51
+    transition: margin-left 100ms linear
+    background: $primary-darker-color
   .sideBarClosed
-    width: 0
+    margin-left: -100vw
