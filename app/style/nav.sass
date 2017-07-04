@@ -43,10 +43,18 @@ nav
             transform: translateY(300%)
     .blockRight
       padding: 0.25em 0
+      #settingsButton
+        float: right
+        font-size: 2.2rem
+        cursor: pointer
+        color: $primary-color
+        margin-right: 0.25em
       input[type="text"]
         margin-right: 1em
         float: right
         border: 0.2em solid $primary-darker-color
+        &:focus
+          width: 15em
   .topBarClosed
     transform: translateY(-110%) !important
   .sideBar
@@ -59,6 +67,12 @@ nav
     transition: transform 200ms ease-in-out
     background: $primary-darker-color
     z-index: 101
+    #exitSettings
+      position: absolute
+      top: 0.25em
+      right: 0.25em
+      font-size: 2rem
+      cursor: pointer
   .sideBarClosed
     transform: translateX(-100%) !important
 

@@ -13,8 +13,8 @@ main.style.top = topBar.clientHeight + "px";
 
 // open or close sideBar/topBar
 // something on click or whatever
-document.getElementById("menuButton").addEventListener("click", menuSwitch);
-document.getElementById("exitSideMenu").addEventListener("click", menuSwitch);
+document.getElementById("settingsButton").addEventListener("click", menuSwitch);
+document.getElementById("exitSettings").addEventListener("click", menuSwitch);
 
 function menuSwitch() {
   sideBar.classList.toggle("sideBarClosed");
