@@ -13,7 +13,10 @@ main.style.top = topBar.clientHeight + "px";
 
 // open or close sideBar/topBar
 // something on click or whatever
-document.getElementById("menuButton").addEventListener("click", e => {
+document.getElementById("menuButton").addEventListener("click", menuSwitch);
+document.getElementById("exitSideMenu").addEventListener("click", menuSwitch);
+
+function menuSwitch() {
   sideBar.classList.toggle("sideBarClosed");
   if (!topBar.classList.contains("topBarClosed") && !sideBar.classList.contains("sideBarClosed")) {
     topBar.classList.add("topBarClosed");
@@ -22,7 +25,7 @@ document.getElementById("menuButton").addEventListener("click", e => {
     topBar.classList.remove("topBarClosed");
     main.style.top = topBar.clientHeight + "px";
   }
-});
+}
 
 main.addEventListener("wheel", e => {
   if (e.wheelDelta > 0) {
