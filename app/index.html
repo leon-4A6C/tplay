@@ -9,7 +9,11 @@
     <nav>
       <div class="topBar">
         <div class="block blockLeft">
-
+          <ul class="optionBar">
+            <li class="selected">tv-shows</li>
+            <li class="">movies</li>
+            <li class="">anime</li>
+          </ul>
         </div>
         <div class="block blockRight">
           <input type="text" name="" value="" placeholder="Search">
@@ -18,7 +22,15 @@
       <div class="sideBar sideBarClosed"></div>
     </nav>
     <main>
-      <button style="cursor: pointer;" id="menuButton" type="button" name="button">random button to open menu</button>
+      <section class="contentWrapper tv-shows">
+        <button style="cursor: pointer;" id="menuButton" type="button" name="button">random button to open menu</button>
+      </section>
+      <section class="contentWrapper movies">
+        <div class="loader"></div>
+      </section>
+      <section class="contentWrapper anime">
+
+      </section>
     </main>
     <script src="js/nav.js" charset="utf-8"></script>
     <script src="js/index.js" charset="utf-8"></script>

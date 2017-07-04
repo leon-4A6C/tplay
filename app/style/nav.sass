@@ -12,9 +12,37 @@ nav
       width: 50%
       float: left
       min-height: 1px
-      padding: 0.25em 0
     .blockLeft
+      ul.optionBar
+        list-style-type: none
+        margin: 0
+        padding: 0
+        &::after
+          content: ""
+          clear: both
+          display: table
+        li
+          float: left
+          padding: 0.5em 0
+          text-align: center
+          width: 5em
+          cursor: pointer
+          transition: background 300ms
+          &:hover
+            background: rgba(96, 104, 113, 0.1)
+        .selected
+          &::after
+            content: ""
+            height: 0.25em
+            background: $primary-color
+            display: block
+            animation-name: optionBar
+            animation-duration: 300ms
+            animation-iteration-count: 1
+            animation-timing-function: ease-in-out
+            transform: translateY(300%)
     .blockRight
+      padding: 0.25em 0
       input[type="text"]
         margin-right: 1em
         float: right
@@ -33,3 +61,12 @@ nav
     z-index: 101
   .sideBarClosed
     transform: translateX(-100%) !important
+
+
+
+// option selection bar animation
+@keyframes optionBar
+  from
+    width: 0%
+  to
+    width: 100%
