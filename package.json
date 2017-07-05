@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/leon-4A6C/tplay#readme",
   "dependencies": {
-    "electron": "^1.6.11",
-    "tmdbv3": "^0.1.2",
+    "themoviedatabase": "^1.0.0",
     "torrent-stream": "^1.0.3"
   },
   "devDependencies": {
+    "electron": "^1.6.11",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
   }

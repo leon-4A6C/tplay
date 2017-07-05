@@ -16,6 +16,7 @@ main.style.top = topBar.clientHeight + "px";
 document.getElementById("settingsButton").addEventListener("click", menuSwitch);
 document.getElementById("exitSettings").addEventListener("click", menuSwitch);
 
+// switches the sideMenu/settings in view and out of view
 function menuSwitch() {
   sideBar.classList.toggle("sideBarClosed");
   if (!topBar.classList.contains("topBarClosed") && !sideBar.classList.contains("sideBarClosed")) {
