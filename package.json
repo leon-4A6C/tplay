@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/leon-4A6C/tplay#readme",
   "dependencies": {
-    "themoviedatabase": "^1.0.0",
+    "themoviedatabase": "^1.0.1",
     "torrent-stream": "^1.0.3"
   },
   "devDependencies": {
