@@ -88,9 +88,19 @@ input[type="text"]:focus
 
 
 .item
-  width: 12.5%
+  width: 50%
   float: left
   img
     width: 100%
     height: auto
     display: block
+
+@media all and (min-width: 400px)
+  .item
+    width: 33.333%
+@media all and (min-width: 768px)
+  .item
+    width: 25%
+@media all and (min-width: 1024px)
+  .item
+    width: 12.5%
