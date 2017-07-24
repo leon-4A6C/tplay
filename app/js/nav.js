@@ -56,6 +56,10 @@ for (var i = 0; i < optionBar.children.length; i++) {
 
 // switches the page
 function shiftPages(newPage) {
+  if (newPage == currentPage) {
+    return
+  }
+  document.body.scrollTop = 0;
   if (newPage.classList.contains("tv-shows")) {
     newPage.style.transform = "translateX(0)"; // tv-shows
     pages[1].style.transform = "translateX(100%)"; // movies
