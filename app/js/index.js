@@ -2,33 +2,33 @@ const TMDB = require("themoviedatabase");
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 const baseImg = "https://image.tmdb.org/t/p/w500";
 
-Promise.all([
-  tmdb.tv.popular({page: 1}),
-  tmdb.tv.popular({page: 2})
-]).then(shows => {
-  showsResults = [];
-  for (var i = 0; i < shows.length; i++) {
-    showsResults = showsResults.concat(shows[i].results);
-  }
-  // add the item to the shows page
-  for (let i = 0; i < showsResults.length; i++) {
-    addItemToPage(showsResults[i], pages[0]);
-  }
-});
-
-Promise.all([
-  tmdb.movies.popular({page: 1}),
-  tmdb.movies.popular({page: 2})
-]).then(movies => {
-  moviesResults = [];
-  for (var i = 0; i < movies.length; i++) {
-    moviesResults = moviesResults.concat(movies[i].results);
-  }
-  for (let i = 0; i < moviesResults.length; i++) {
-    // add the item to the movies page
-    addItemToPage(moviesResults[i], pages[1]);
-  }
-});
+// Promise.all([
+//   tmdb.tv.popular({page: 1}),
+//   tmdb.tv.popular({page: 2})
+// ]).then(shows => {
+//   showsResults = [];
+//   for (var i = 0; i < shows.length; i++) {
+//     showsResults = showsResults.concat(shows[i].results);
+//   }
+//   // add the item to the shows page
+//   for (let i = 0; i < showsResults.length; i++) {
+//     addItemToPage(showsResults[i], pages[0]);
+//   }
+// });
+//
+// Promise.all([
+//   tmdb.movies.popular({page: 1}),
+//   tmdb.movies.popular({page: 2})
+// ]).then(movies => {
+//   moviesResults = [];
+//   for (var i = 0; i < movies.length; i++) {
+//     moviesResults = moviesResults.concat(movies[i].results);
+//   }
+//   for (let i = 0; i < moviesResults.length; i++) {
+//     // add the item to the movies page
+//     addItemToPage(moviesResults[i], pages[1]);
+//   }
+// });
 
 function generateItem(data) {
   let imgUrl = baseImg + data.poster_path;
@@ -43,16 +43,19 @@ function generateItem(data) {
 
 function addItemToPage(data, page) {
   let clone = generateItem(data);
-  console.log(data);
 
   page.appendChild(clone);
+
 
   const items = page.querySelectorAll(".item");
 
   // fix the height
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
+    items[i].onclick = e => {
+      console.log(e);
+    }
     items[i].title = items[i].children[0].alt;
-    items[i].style.height = (items[i].clientWidth * 1.5) + "px";
+    items[i].style.height = (items[i].getBoundingClientRect().width * 1.5) + "px";
   }
 
 }
