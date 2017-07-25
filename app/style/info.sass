@@ -11,10 +11,20 @@
 
   p
     padding: 2em
-
-@media all and (min-width: 400px)
-  .info
-    width: 100%
+  ul.seasons
+    padding: 0
+    list-style-type: none
+    margin: 0
+    a
+      text-decoration: none
+      color: inherit
+      display: block
+      padding: 1em 0em
+      transition: box-shadow 300ms
+      &:hover
+        box-shadow: inset 0 0 1em 0 $primary-darker-color
+      li
+        text-align: center
 @media all and (min-width: 1024px)
   .info
     width: 50%
