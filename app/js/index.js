@@ -1,11 +1,13 @@
 const TMDB = require("themoviedatabase");
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
-const baseImg = "https://image.tmdb.org/t/p/w500";
+const posterBaseUrl = "https://image.tmdb.org/t/p/w500";
+const backdropBaseUrl = "https://image.tmdb.org/t/p/w780";
 
 // Promise.all([
 //   tmdb.tv.popular({page: 1}),
 //   tmdb.tv.popular({page: 2})
 // ]).then(shows => {
+//   console.log(shows);
 //   showsResults = [];
 //   for (var i = 0; i < shows.length; i++) {
 //     showsResults = showsResults.concat(shows[i].results);
@@ -31,7 +33,7 @@ const baseImg = "https://image.tmdb.org/t/p/w500";
 // });
 
 function generateItem(data) {
-  let imgUrl = baseImg + data.poster_path;
+  let imgUrl = posterBaseUrl + data.poster_path;
   let template = document.querySelector("#item");
   let clone = document.importNode(template.content, true);
   clone.title = data.name;

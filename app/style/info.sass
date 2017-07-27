@@ -1,30 +1,53 @@
 .info
   position: fixed
   width: 100%
-  height: 100vh
+  min-height: 100vh
   overflow: hidden
-  background: $primary-dark-color
+  background: $info-background
   top: 0
   right: 0
-  box-shadow: inset 1px 0 0 0 $primary-darker-color
+  box-shadow: inset 1px 0 0 0 $info-secundary
+  .background
+    z-index: -1
+    position: absolute
+    top: 0
+    width: 100%
+    .fade
+      position: absolute
+      bottom: 0
+      width: 100%
+      height: 100%
+      background-image: -webkit-linear-gradient(bottom, $info-background 0%, $info-background 10%, transparent 50%)
+    img
+      filter: opacity(0.3)
+      width: 100%
+      height: auto
   h1
 
   p
     padding: 2em
-  ul.seasons
+  ul
     padding: 0
     list-style-type: none
     margin: 0
-    a
-      text-decoration: none
-      color: inherit
-      display: block
+    li
       padding: 1em 0em
       transition: box-shadow 300ms
+      text-align: center
       &:hover
-        box-shadow: inset 0 0 1em 0 $primary-darker-color
-      li
-        text-align: center
+        box-shadow: inset 0 0 1em 0 $info-secundary
+      &:hover > ul
+        height: auto
+      h3, h4, h5
+        cursor: pointer
+        margin: 0
+        padding: 0
+      ul
+        transition: height 300ms
+        height: 0
+        overflow: hidden
+        li
+
 @media all and (min-width: 1024px)
   .info
     width: 50%
