@@ -3,20 +3,20 @@ const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 const posterBaseUrl = "https://image.tmdb.org/t/p/w500";
 const backdropBaseUrl = "https://image.tmdb.org/t/p/w780";
 
-// Promise.all([
-//   tmdb.tv.popular({page: 1}),
-//   tmdb.tv.popular({page: 2})
-// ]).then(shows => {
-//   console.log(shows);
-//   showsResults = [];
-//   for (var i = 0; i < shows.length; i++) {
-//     showsResults = showsResults.concat(shows[i].results);
-//   }
-//   // add the item to the shows page
-//   for (let i = 0; i < showsResults.length; i++) {
-//     addItemToPage(showsResults[i], pages[0]);
-//   }
-// });
+Promise.all([
+  tmdb.tv.popular({page: 1}),
+  tmdb.tv.popular({page: 2})
+]).then(shows => {
+  console.log(shows);
+  showsResults = [];
+  for (var i = 0; i < shows.length; i++) {
+    showsResults = showsResults.concat(shows[i].results);
+  }
+  // add the item to the shows page
+  for (let i = 0; i < showsResults.length; i++) {
+    addItemToPage(showsResults[i], pages[0]);
+  }
+});
 //
 // Promise.all([
 //   tmdb.movies.popular({page: 1}),
