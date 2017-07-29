@@ -16,21 +16,25 @@ Promise.all([
   for (let i = 0; i < showsResults.length; i++) {
     addItemToPage(showsResults[i], pages[0]);
   }
+}).catch(e => {
+  console.log(e);
 });
-//
-// Promise.all([
-//   tmdb.movies.popular({page: 1}),
-//   tmdb.movies.popular({page: 2})
-// ]).then(movies => {
-//   moviesResults = [];
-//   for (var i = 0; i < movies.length; i++) {
-//     moviesResults = moviesResults.concat(movies[i].results);
-//   }
-//   for (let i = 0; i < moviesResults.length; i++) {
-//     // add the item to the movies page
-//     addItemToPage(moviesResults[i], pages[1]);
-//   }
-// });
+
+Promise.all([
+  tmdb.movies.popular({page: 1}),
+  tmdb.movies.popular({page: 2})
+]).then(movies => {
+  moviesResults = [];
+  for (var i = 0; i < movies.length; i++) {
+    moviesResults = moviesResults.concat(movies[i].results);
+  }
+  for (let i = 0; i < moviesResults.length; i++) {
+    // add the item to the movies page
+    addItemToPage(moviesResults[i], pages[1]);
+  }
+}).catch(e => {
+  console.log(e);
+});
 
 function generateItem(data) {
   let imgUrl = posterBaseUrl + data.poster_path;
@@ -61,3 +65,11 @@ function addItemToPage(data, page) {
   }
 
 }
+
+// load more when scrolled all the way to the bottom
+window.addEventListener("scroll", e => {
+  console.log(e);
+  if (window.scrollTop >= document.body.getBoundingClientRect().height - 10) {
+    console.log("ok");
+  }
+});

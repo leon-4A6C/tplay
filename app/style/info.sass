@@ -7,21 +7,22 @@
   top: 0
   right: 0
   box-shadow: inset 1px 0 0 0 $info-secundary
-  .background
-    z-index: -1
-    position: absolute
-    top: 0
-    width: 100%
-    .fade
+  .bgWrapper
+    .background
+      z-index: -1
       position: absolute
-      bottom: 0
+      top: 0
       width: 100%
-      height: 100%
-      background-image: -webkit-linear-gradient(bottom, $info-background 0%, $info-background 10%, transparent 50%)
-    img
-      filter: opacity(0.3)
-      width: 100%
-      height: auto
+      .fade
+        position: absolute
+        bottom: 0
+        width: 100%
+        height: 100%
+        background-image: -webkit-linear-gradient(bottom, $info-background 0%, $info-background 10%, transparent 50%)
+      img
+        filter: opacity(0.3)
+        width: 100%
+        height: auto
   .trailerButton
     background: transparent
     border: 0.05em solid $secundary-color
