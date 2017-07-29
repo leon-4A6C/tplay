@@ -5,6 +5,10 @@ section.contentWrapper
   height: 100vh
   transition: transform 300ms
   overflow: auto
+  &::after
+    content: ""
+    clear: both
+    display: table
 section.contentWrapper.tv-shows
   transform: translateX(0%)
 section.contentWrapper.movies

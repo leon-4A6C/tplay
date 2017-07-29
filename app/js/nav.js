@@ -1,8 +1,8 @@
-const topBar = document.getElementsByClassName("topBar")[0]; // there is only one
-const sideBar = document.getElementsByClassName("sideBar")[0]; // there is only one
-const main = document.getElementsByTagName("main")[0]; // there is only one
-const optionBar = document.getElementsByClassName("optionBar")[0]; // there is only one
-const pages = document.getElementsByClassName("contentWrapper");
+const topBar = document.querySelector(".topBar"); // there is only one
+const sideBar = document.querySelector(".sideBar"); // there is only one
+const main = document.querySelector("main"); // there is only one
+const optionBar = document.querySelector(".optionBar"); // there is only one
+const pages = document.querySelectorAll(".contentWrapper");
 let currentPageOptionBar = optionBar.children[0]; // starts on tv-shows
 let currentPage = pages[0]; // starts on tv-shows
 
@@ -57,7 +57,7 @@ for (var i = 0; i < optionBar.children.length; i++) {
 // switches the page
 function shiftPages(newPage) {
   if (newPage == currentPage) {
-    return
+    return;
   }
   // document.body.scrollTop = 0;
   if (newPage.classList.contains("tv-shows")) {
