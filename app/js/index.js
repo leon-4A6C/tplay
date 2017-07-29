@@ -55,7 +55,7 @@ function addItemToPage(data, page) {
   for (let i = 0; i < items.length; i++) {
     items[i].onclick = e => {
       console.log(e);
-    }
+    };
     items[i].title = items[i].children[0].alt;
     items[i].style.height = (items[i].getBoundingClientRect().width * 1.5) + "px";
   }
