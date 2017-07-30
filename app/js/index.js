@@ -5,7 +5,7 @@ const backdropBaseUrl = "https://image.tmdb.org/t/p/w780";
 const pagesLoaded = {
   tv: 1,
   movies: 1
-}
+};
 
 // Promise.all([
 //   tmdb.tv.popular({page: pagesLoaded.tv++})
