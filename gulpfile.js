@@ -16,7 +16,7 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
   return gulp.src('app/js/**/*.js')
-    .pipe(babel())
+    .pipe(babel().on("error", e => console.log(e)))
     .pipe(gulp.dest('dist/js/'));
 });
 
@@ -36,6 +36,6 @@ gulp.task('build', ["fonts", "sass", "js", "html"], function() {
 
 gulp.task('watch', ["build"], function () {
   gulp.watch('app/style/**/*.sass', ['build']);
-  gulp.watch('app/js/**/*.js', ['build']);
+  gulp.watch('app/js/**/*', ['build']);
   gulp.watch('app/**/*.html', ['build']);
 });
