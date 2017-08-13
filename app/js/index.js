@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 const TMDB = require("themoviedatabase");
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 const posterBaseUrl = "https://image.tmdb.org/t/p/w500";
@@ -100,3 +102,8 @@ window.addEventListener("keydown", e => {
     shiftPages(pages[i]);
   }
 });
+
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);
