@@ -34,7 +34,6 @@ export default class Info extends React.Component {
       tmdb[this.props.type].videos({}, tmdbOption),
       tmdb[this.props.type].credits({}, tmdbOption)
     ]).then(info => {
-      console.log(info);
       this.setState({
         info: info[0],
         trailer: this.getTrailer(info[1].results),

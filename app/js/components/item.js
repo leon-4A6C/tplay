@@ -12,12 +12,16 @@ export default class Item extends React.Component {
   }
 
   componentDidMount() {
-    var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    this.setState({
-      style: {
-        height: (rect.width * 1.5) + "px"
-      }
-    });
+
+    // fix the diff in height
+    var rect = ReactDOM.findDOMNode(this);
+    setTimeout(() => {
+      this.setState({
+        style: {
+          height: (rect.getBoundingClientRect().width * 1.425) + "px"
+        }
+      });
+    }, 10);
   }
 
   render() {

@@ -9,7 +9,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pages: [<Page key="tv" name="tv-shows"></Page>]
+      pages: [<Page key="tv" tmdb="tv" name="tv-shows"></Page>]
     }
   }
   render() {

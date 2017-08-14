@@ -26,7 +26,7 @@ export default class Page extends React.Component {
     this.isLoading = true;
     const x = [];
     for (let i = 0; i < amountPages; i++) {
-      x.push(tmdb.tv.popular({page: this.loadedPages+1}));
+      x.push(tmdb[this.props.tmdb].popular({page: this.loadedPages+1}));
       this.loadedPages++;
     }
     Promise.all(x).then(data => {
