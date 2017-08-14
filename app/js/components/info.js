@@ -55,7 +55,7 @@ export default class Info extends React.Component {
 
   render() {
     return (
-      <div className="info">
+      <div className="info infoClosed">
         <div className="bgWrapper">
           <FadedBackground src={this.state.info.backdrop_path} alt={this.state.info.name}></FadedBackground>
           <h1>{this.state.info.name || this.state.info.title}</h1>

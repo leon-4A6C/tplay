@@ -16,7 +16,7 @@ export default class TrailerButton extends React.Component {
     return (
       <button onClick={this.playTrailer} className="trailerButton" type="button" name="button">
         <span className="fa fa-play"></span>
-         trailer
+        {`\ttrailer`}
       </button>
     )
   }

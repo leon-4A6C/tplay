@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Info from "./js/components/info.js";
 import Page from "./js/components/page.js";
 // import Settings from "./js/components/settings.js";
-// import Nav from "./js/components/nav.js";
+import Nav from "./js/components/nav.js";
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Main extends React.Component {
     return (
       <div className="main">
         <nav>
+          <Nav pages={this.state.pages}></Nav>
         </nav>
         <main>
           {this.state.pages}

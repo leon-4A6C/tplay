@@ -6,13 +6,17 @@ export default class Nav extends React.Component {
     super(props);
   }
   render() {
+
+    const items = [];
+    for (let item of this.props.pages) {
+      items.push(<li key={item.key} className="selected">{item.props.name}</li>);
+    }
+
     return (
       <div className="topBar">
         <div className="block blockLeft">
           <ul className="optionBar">
-            <li className="selected">tv-shows</li>
-            <li className="">movies</li>
-            <li className="">anime</li>
+            {items}
           </ul>
         </div>
         <div className="block blockRight">
