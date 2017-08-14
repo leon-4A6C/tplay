@@ -13,6 +13,7 @@ export default class Page extends React.Component {
     }
 
     this.loadedPages = 0;
+    this.scrollLoadOffset = 500;
 
     this.addItems = this.addItems.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
@@ -22,11 +23,11 @@ export default class Page extends React.Component {
     this.addItems(2);
   }
 
-  addItems(amountPages) {
+  addItems(amountPages = 1) {
     this.isLoading = true;
     const x = [];
     for (let i = 0; i < amountPages; i++) {
-      x.push(tmdb[this.props.tmdb].popular({page: this.loadedPages+1}));
+      x.push(tmdb[this.props.type].popular({page: this.loadedPages+1}));
       this.loadedPages++;
     }
     Promise.all(x).then(data => {
@@ -52,8 +53,8 @@ export default class Page extends React.Component {
 
   scrolledToBottom(e) {
     const page = ReactDOM.findDOMNode(this);
-    if (page.scrollTop >= (page.scrollHeight - page.clientHeight) && !this.isLoading) {
-      this.addItems(1);
+    if (page.scrollTop >= (page.scrollHeight - page.clientHeight)-this.scrollLoadOffset && !this.isLoading) {
+      this.addItems();
     }
   }
 

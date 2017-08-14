@@ -15,7 +15,10 @@ export default class Info extends React.Component {
         overview: "loading",
         backdrop_path: ""
       },
-      trailer: "loading"
+      trailer: "loading",
+      cast: [],
+      crew: [],
+      seasons: [],
     }
   }
 
@@ -38,7 +41,8 @@ export default class Info extends React.Component {
         info: info[0],
         trailer: this.getTrailer(info[1].results),
         cast: info[2].cast,
-        crew: info[2].crew
+        crew: info[2].crew,
+        seasons: info[0].seasons
       });
     }).catch(e => console.log(e));
   }
@@ -54,16 +58,16 @@ export default class Info extends React.Component {
 
   render() {
     return (
-      <div className="info infoClosed">
+      <div className="info">
         <div className="bgWrapper">
           <FadedBackground src={this.state.info.backdrop_path} alt={this.state.info.name}></FadedBackground>
           <h1>{this.state.info.name || this.state.info.title}</h1>
           <p>{this.state.info.overview}</p>
           <TrailerButton trailer={this.state.trailer}></TrailerButton>
         </div>
-        <InfoList title="seasons"></InfoList>
-        <InfoList title="cast"></InfoList>
-        <InfoList title="crew"></InfoList>
+        <InfoList seasons={this.state.seasons} title="seasons"></InfoList>
+        <InfoList cast={this.state.cast} title="cast"></InfoList>
+        <InfoList crew={this.state.crew} title="crew"></InfoList>
       </div>);
   }
 }

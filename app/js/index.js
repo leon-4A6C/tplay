@@ -9,14 +9,13 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pages: [<Page key="tv" tmdb="tv" name="tv-shows"></Page>]
+      pages: [<Page key="tv" type="tv" name="tv-shows"></Page>]
     }
   }
   render() {
     return (
       <div className="main">
         <nav>
-          <Nav pages={this.state.pages}></Nav>
         </nav>
         <main>
           {this.state.pages}

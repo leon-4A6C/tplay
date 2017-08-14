@@ -6,22 +6,26 @@ export default class Item extends React.Component {
     super(props);
     this.state = {
       style: {
-        height: 0
+        height: "100%" // this apperently helps with the fix in height below
       }
     }
   }
 
   componentDidMount() {
+    const rect = ReactDOM.findDOMNode(this);
+    window.addEventListener("resize", () => {
+      this.fixHeight(rect);
+    });
+    this.fixHeight(rect);
+  }
 
+  fixHeight(rect) {
     // fix the diff in height
-    var rect = ReactDOM.findDOMNode(this);
-    setTimeout(() => {
-      this.setState({
-        style: {
-          height: (rect.getBoundingClientRect().width * 1.425) + "px"
-        }
-      });
-    }, 10);
+    this.setState({
+      style: {
+        height: (rect.getBoundingClientRect().width * 1.5) + "px"
+      }
+    });
   }
 
   render() {
