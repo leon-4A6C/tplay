@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FadedBackground from "./fadedBackground.js";
 import TrailerButton from "./trailerButton.js";
+import InfoList from "./infoList.js";
 const TMDB = require("themoviedatabase");
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 
@@ -61,24 +62,9 @@ export default class Info extends React.Component {
           <p>{this.state.info.overview}</p>
           <TrailerButton trailer={this.state.trailer}></TrailerButton>
         </div>
-        <h2 className="seasonsTitle">seasons</h2>
-        <ul className="infoList seasons">
-          <li>
-            <h3>season 1</h3>
-          </li>
-          <li>
-            <h3>season 2</h3>
-          </li>
-        </ul>
-        <h2 className="castTitle">cast</h2>
-        <ul className="infoList cast">
-          <li>
-            <h3>bla</h3>
-          </li>
-          <li>
-            <h3>bla</h3>
-          </li>
-        </ul>
+        <InfoList title="seasons"></InfoList>
+        <InfoList title="cast"></InfoList>
+        <InfoList title="crew"></InfoList>
       </div>);
   }
 }
