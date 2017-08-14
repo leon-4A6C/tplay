@@ -104,48 +104,118 @@ window.addEventListener("keydown", e => {
   }
 });
 
+class FadedBackground extends React.Component {
+  constructor(props) {
+    super(props);
+    this.baseUrl = "https://image.tmdb.org/t/p/w780";
+  }
+  render() {
+    return (
+      <div className="background">
+        <img src={this.baseUrl + this.props.src} alt={this.props.alt}></img>
+        <div className="fade"></div>
+      </div>
+    )
+  }
+}
+
+class TrailerButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.playTrailer = this.playTrailer.bind(this);
+  }
+
+  playTrailer(e) {
+    console.log("play trailer: " + this.props.trailer);
+  }
+
+  render() {
+    return (
+      <button onClick={this.playTrailer} className="trailerButton" type="button" name="button">
+        <span className="fa fa-play"></span>
+         trailer
+      </button>
+    )
+  }
+}
+
 class Info extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      info: {
+        name: "loading",
+        overview: "loading",
+        backdrop_path: "loading"
+      },
+      trailer: "loading"
+    }
+    const tmdbOption = {};
+    if (this.props.type === "movies") {
+      tmdbOption["movie_id"] = this.props.tmdbId;
+    } else if(this.props.type === "tv") {
+      tmdbOption["tv_id"] = this.props.tmdbId;
+    } else {
+      console.warn("Wrong type!, only movies and tv allowed");
+    }
+
+    Promise.all([
+      tmdb[this.props.type].details({}, tmdbOption),
+      tmdb[this.props.type].videos({}, tmdbOption),
+      tmdb[this.props.type].credits({}, tmdbOption)
+    ]).then(info => {
+      console.log(info);
+      this.setState({
+        info: info[0],
+        trailer: this.getTrailer(info[1].results),
+        cast: info[2].cast,
+        crew: info[2].crew
+      });
+    }).catch(e => console.log(e));
   }
+
+  getTrailer(res) {
+    for (let vid of res) {
+      if (vid.site === "YouTube" && vid.type === "Trailer") {
+        return vid.key;
+      }
+    }
+    return null;
+  }
+
   render() {
     return (
       <div>
         <div className="bgWrapper">
-          <div className="background">
-          <img src="https://image.tmdb.org/t/p/w780/mUkuc2wyV9dHLG0D0Loaw5pO2s8.jpg" alt=""></img>
-          <div className="fade"></div>
+          <FadedBackground src={this.state.info.backdrop_path} alt={this.state.info.name}></FadedBackground>
+          <h1>{this.state.info.name || this.state.info.title}</h1>
+          <p>{this.state.info.overview}</p>
+          <TrailerButton trailer={this.state.trailer}></TrailerButton>
         </div>
-        <h1>Game of thrones</h1>
-        <p>Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and the icy horrors beyond.</p>
-        <button className="trailerButton" type="button" name="button">
-          <span className="fa fa-play">
-          </span> trailer
-        </button>
-      </div>
-      <h2 className="seasonsTitle">seasons</h2>
-      <ul className="infoList seasons">
-        <li>
-          <h3>season 1</h3>
-        </li>
-        <li>
-          <h3>season 2</h3>
-        </li>
-      </ul>
-      <h2 className="crewTitle">crew</h2>
-      <ul className="infoList crew">
-        <li>
-          <h3>bla</h3>
-        </li>
-        <li>
-          <h3>bla</h3>
-        </li>
-      </ul>
-    </div>);
+        <h2 className="seasonsTitle">seasons</h2>
+        <ul className="infoList seasons">
+          <li>
+            <h3>season 1</h3>
+          </li>
+          <li>
+            <h3>season 2</h3>
+          </li>
+        </ul>
+        <h2 className="castTitle">cast</h2>
+        <ul className="infoList cast">
+          <li>
+            <h3>bla</h3>
+          </li>
+          <li>
+            <h3>bla</h3>
+          </li>
+        </ul>
+      </div>);
   }
 }
 
 ReactDOM.render(
-  <Info></Info>,
+  <Info type="tv" tmdbId="1399"></Info>,
   document.querySelector('.info')
 );
