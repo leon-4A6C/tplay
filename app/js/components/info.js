@@ -12,10 +12,13 @@ export default class Info extends React.Component {
       info: {
         name: "loading",
         overview: "loading",
-        backdrop_path: "loading"
+        backdrop_path: ""
       },
       trailer: "loading"
     }
+  }
+
+  componentWillMount() {
     const tmdbOption = {};
     if (this.props.type === "movies") {
       tmdbOption["movie_id"] = this.props.tmdbId;
@@ -51,7 +54,7 @@ export default class Info extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="info">
         <div className="bgWrapper">
           <FadedBackground src={this.state.info.backdrop_path} alt={this.state.info.name}></FadedBackground>
           <h1>{this.state.info.name || this.state.info.title}</h1>
