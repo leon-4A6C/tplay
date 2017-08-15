@@ -53,22 +53,27 @@
     margin: 7.5em 0 1em 1em
   h2.castTitle
     margin: 5em 0 1em 1em
-  ul.infoListUl
-    padding: 0
-    list-style-type: none
-    margin: 0
-    li
-      padding: 1em 0em
-      transition: box-shadow 300ms
-      text-align: center
-      float: left
-      width: 50%
-      &:hover
-        box-shadow: inset 0 0 1em 0 $info-secundary
-      h3, h4, h5
-        cursor: pointer
-        margin: 0
-        padding: 0
+  div.infoList
+    ul.infoListUl
+      padding: 0
+      list-style-type: none
+      margin: 0
+      min-width: 100%
+      position: relative
+      white-space: nowrap
+      overflow-x: auto
+      overflow-y: hidden
+      li
+        display: inline-block
+        overflow: hidden
+        text-align: center
+        color: black
+        background: white
+        width: 20%
+        img
+          width: 100%
+          height: auto
+
 
 @media all and (min-width: 1024px)
   .info

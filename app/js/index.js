@@ -20,7 +20,7 @@ class Main extends React.Component {
         <main>
           {this.state.pages}
         </main>
-        <Info type="tv" tmdbId="1399"></Info>
+        <Info type="tv" tmdbId="70485"></Info>
       </div>
     )
   }

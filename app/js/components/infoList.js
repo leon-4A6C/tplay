@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 const profile_path = "http://image.tmdb.org/t/p/h632";
 
 export default class Infolist extends React.Component {
@@ -14,7 +13,7 @@ export default class Infolist extends React.Component {
     } else if (this.props.title === "crew") {
       this.items = this.props.crew.map(x => (<CrewItem key={x.id} data={x}></CrewItem>));
     } else {
-      console.warn("in correct title prop, it should be seasons, cast or crew");
+      throw new Error("in correct title prop, it should be seasons, cast or crew");
     }
     return (
       <div className="infoList">
@@ -30,13 +29,12 @@ export default class Infolist extends React.Component {
 class SeasonsItem extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
   render() {
     return (
       <li>
         <img src={`${profile_path}${this.props.data.poster_path}`}></img>
-        <h3>{this.props.title} 1</h3>
+        <h3>{this.props.data.season_number == 0 ? "specials" : "season " + this.props.data.season_number}</h3>
       </li>
     )
   }
@@ -45,13 +43,13 @@ class SeasonsItem extends React.Component {
 class CastItem extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
   render() {
     return (
       <li>
         <img src={`${profile_path}${this.props.data.profile_path}`}></img>
-        <h3>{this.props.title} 1</h3>
+        <h3>{this.props.data.name}</h3>
+        <h6>{this.props.data.character}</h6>
       </li>
     )
   }
@@ -60,13 +58,13 @@ class CastItem extends React.Component {
 class CrewItem extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
   render() {
     return (
       <li>
         <img src={`${profile_path}${this.props.data.profile_path}`}></img>
-        <h3>{this.props.title} 1</h3>
+        <h3>{this.props.data.name}</h3>
+        <h6>{this.props.data.job}</h6>
       </li>
     )
   }

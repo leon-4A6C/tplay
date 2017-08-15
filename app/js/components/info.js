@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import FadedBackground from "./fadedBackground.js";
 import TrailerButton from "./trailerButton.js";
 import InfoList from "./infoList.js";
@@ -29,7 +28,7 @@ export default class Info extends React.Component {
     } else if(this.props.type === "tv") {
       tmdbOption["tv_id"] = this.props.tmdbId;
     } else {
-      console.warn("Wrong type!, only movies and tv allowed");
+      throw new Error("Wrong type!, only movies and tv allowed");
     }
 
     Promise.all([
@@ -57,6 +56,10 @@ export default class Info extends React.Component {
   }
 
   render() {
+    const infoLists = [<InfoList key="cast" cast={this.state.cast} title="cast"></InfoList>, <InfoList key="crew" crew={this.state.crew} title="crew"></InfoList>];
+    if (this.state.seasons) {
+      infoLists.unshift(<InfoList key="seasons" seasons={this.state.seasons} title="seasons"></InfoList>);
+    }
     return (
       <div className="info">
         <div className="bgWrapper">
@@ -65,9 +68,7 @@ export default class Info extends React.Component {
           <p>{this.state.info.overview}</p>
           <TrailerButton trailer={this.state.trailer}></TrailerButton>
         </div>
-        <InfoList seasons={this.state.seasons} title="seasons"></InfoList>
-        <InfoList cast={this.state.cast} title="cast"></InfoList>
-        <InfoList crew={this.state.crew} title="crew"></InfoList>
+        {infoLists}
       </div>);
   }
 }
