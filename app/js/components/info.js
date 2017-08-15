@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+const TMDB = require("themoviedatabase");
+
 import FadedBackground from "./fadedBackground.js";
 import TrailerButton from "./trailerButton.js";
 import InfoList from "./infoList.js";
-const TMDB = require("themoviedatabase");
+
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 
-export default class Info extends React.Component {
+class Info extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,21 +24,22 @@ export default class Info extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentWillUpdate() {
+    const { info } = this.props;
     const tmdbOption = {};
-    if (this.props.type === "movies") {
-      tmdbOption["movie_id"] = this.props.tmdbId;
-    } else if(this.props.type === "tv") {
-      tmdbOption["tv_id"] = this.props.tmdbId;
+    if (info.type === "movies") {
+      tmdbOption["movie_id"] = info.tmdbId;
+    } else if(info.type === "tv") {
+      tmdbOption["tv_id"] = info.tmdbId;
     } else {
       throw new Error("Wrong type!, only movies and tv allowed");
     }
-
     Promise.all([
-      tmdb[this.props.type].details({}, tmdbOption),
-      tmdb[this.props.type].videos({}, tmdbOption),
-      tmdb[this.props.type].credits({}, tmdbOption)
+      tmdb[info.type].details({}, tmdbOption),
+      tmdb[info.type].videos({}, tmdbOption),
+      tmdb[info.type].credits({}, tmdbOption)
     ]).then(info => {
+      console.log(info);
       this.setState({
         info: info[0],
         trailer: this.getTrailer(info[1].results),
@@ -63,8 +67,8 @@ export default class Info extends React.Component {
     return (
       <div className="info">
         <div className="bgWrapper">
-          <FadedBackground src={this.state.info.backdrop_path} alt={this.state.info.name}></FadedBackground>
-          <h1>{this.state.info.name || this.state.info.title}</h1>
+          <FadedBackground src={this.state.info.backdrop_path} alt={this.props.info.title}></FadedBackground>
+          <h1>{this.props.info.title}</h1>
           <p>{this.state.info.overview}</p>
           <TrailerButton trailer={this.state.trailer}></TrailerButton>
         </div>
@@ -72,3 +76,7 @@ export default class Info extends React.Component {
       </div>);
   }
 }
+
+export default connect((state) => {
+  return state.info;
+})(Info);

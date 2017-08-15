@@ -38,7 +38,7 @@ export default class Page extends React.Component {
         }
       }
       return x;
-    }).then(res => res.map((x) => (<Item src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>)))
+    }).then(res => res.map((x) => (<Item type={this.props.type} src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>)))
       .then(items => {
         let itemState = this.state.items;
         for (let item of items) {

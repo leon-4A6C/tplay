@@ -1,32 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Info from "./js/components/info.js";
-import Page from "./js/components/page.js";
-// import Settings from "./js/components/settings.js";
-import Nav from "./js/components/nav.js";
+import { Provider } from "react-redux";
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      pages: [<Page key="tv" type="tv" name="tv-shows"></Page>]
-    }
-  }
-  render() {
-    return (
-      <div className="main">
-        <nav>
-        </nav>
-        <main>
-          {this.state.pages}
-        </main>
-        <Info type="tv" tmdbId="70485"></Info>
-      </div>
-    )
-  }
-}
+import Layout from "./js/components/layout.js";
+import store from "./js/store.js";
 
 ReactDOM.render(
-  <Main></Main>,
-  document.querySelector(".container")
+  <Provider store={store}>
+    <Layout></Layout>
+  </Provider>,
+  document.querySelector(".app")
 );
