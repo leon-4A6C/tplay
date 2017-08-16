@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from "react-redux";
 
-import itemClick from "../actions/itemClick.js";
+import { itemClick } from "../actions";
 
 class Item extends React.Component {
   constructor(props) {

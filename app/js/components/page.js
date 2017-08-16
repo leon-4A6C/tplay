@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import Item from "./item.js";
 const TMDB = require("themoviedatabase");
 const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
 
-export default class Page extends React.Component {
+class Page extends React.Component {
   constructor(props) {
     super(props);
 
@@ -66,3 +67,6 @@ export default class Page extends React.Component {
     )
   }
 }
+export default connect((state) => {
+  return state
+})(Page);
