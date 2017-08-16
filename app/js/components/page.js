@@ -2,19 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Item from "./item.js";
-const TMDB = require("themoviedatabase");
-const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
+import tmdb from "../tmdb";
+
+import { page } from "../actions";
 
 class Page extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      items: []
-    }
-
     this.loadedPages = 0;
     this.scrollLoadOffset = 500;
+    this.items = [];
 
     this.addItems = this.addItems.bind(this);
     this.scrolledToBottom = this.scrolledToBottom.bind(this);
@@ -25,31 +23,9 @@ class Page extends React.Component {
   }
 
   addItems(amountPages = 1) {
-    this.isLoading = true;
-    const x = [];
-    for (let i = 0; i < amountPages; i++) {
-      x.push(tmdb[this.props.type].popular({page: this.loadedPages+1}));
-      this.loadedPages++;
+    for (var i = 0; i < amountPages; i++) {
+      this.props.dispatch(page.request(this.props.type, ++this.loadedPages));
     }
-    Promise.all(x).then(data => {
-      const x = [];
-      for (let d of data) {
-        for (let res of d.results) {
-          x.push(res);
-        }
-      }
-      return x;
-    }).then(res => res.map((x) => (<Item type={this.props.type} src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>)))
-      .then(items => {
-        let itemState = this.state.items;
-        for (let item of items) {
-          itemState.push(item);
-        }
-        this.setState({
-          items: itemState
-        });
-        this.isLoading = false;
-      });
   }
 
   scrolledToBottom(e) {
@@ -59,14 +35,26 @@ class Page extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.page.page != this.props.page.page) {
+      let newItems = [...this.props.page.results]
+                    .map((x) => (<Item type={this.props.type} src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>));
+      this.items = [...this.items, newItems];
+    }
+  }
+
   render() {
+
+
     return (
       <section onScroll={this.scrolledToBottom} id={this.props.name} className={`contentWrapper ${this.props.name}`}>
-        {this.state.items}
+        {this.items}
       </section>
-    )
+    );
   }
 }
 export default connect((state) => {
-  return state
+  return {
+    page: state.page
+  }
 })(Page);

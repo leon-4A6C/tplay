@@ -1,4 +1,4 @@
-export default function action(tmdbId, title, type) {
+export function click(tmdbId, title, type) {
   return {
     type: "ITEM_CLICK",
     payload: {

@@ -10,14 +10,11 @@ import { info as infoActions } from "../actions";
 class Info extends React.Component {
   constructor(props) {
     super(props);
-    this.lastTmdbId = null;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { itemInfo, tmdb } = this.props;
-    console.log(this.props);
-    if (itemInfo.tmdbId != this.lastTmdbId) {
-      this.lastTmdbId = itemInfo.tmdbId;
+    if (itemInfo.tmdbId != prevProps.itemInfo.tmdbId) {
       this.props.dispatch(infoActions.request(itemInfo.tmdbId, itemInfo.type));
     }
   }

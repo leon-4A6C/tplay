@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from "react-redux";
 
-import { itemClick } from "../actions";
+import { item } from "../actions";
 
 class Item extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Item extends React.Component {
   }
 
   itemClick() {
-    this.props.dispatch(itemClick(this.props.tmdbId, this.props.name, this.props.type))
+    this.props.dispatch(item.click(this.props.tmdbId, this.props.name, this.props.type));
   }
 
   render() {

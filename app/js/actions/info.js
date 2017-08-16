@@ -1,5 +1,4 @@
-const TMDB = require("themoviedatabase");
-const tmdb = new TMDB("81485988d49a76332eea5e3a5297d342");
+import tmdb from "../tmdb";
 
 export function request(tmdbId, type) {
 

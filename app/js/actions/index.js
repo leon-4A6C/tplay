@@ -1,4 +1,5 @@
-import itemClick from "./itemClick.js";
+import * as item from "./item.js";
 import * as info from "./info.js";
+import * as page from "./page.js";
 
-export { itemClick, info }
+export { item, info, page }
