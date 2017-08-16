@@ -1,14 +1,14 @@
 export default function reducer(state = {
-  tmdbId: 1399,
-  title: "Game of Thrones",
-  type: "tv"}, action) {
+  tmdbId: null,
+  title: null,
+  type: null}, action) {
   switch (action.type) {
 
     case "ITEM_CLICK":
-      return {...state, ...action.payload};
+      return {...state, type: action.type, ...action.payload};
       break;
 
     default:
-      return {...state}
+      return {...state, type: action.type}
   }
 }

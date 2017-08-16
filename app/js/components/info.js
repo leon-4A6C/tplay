@@ -10,46 +10,63 @@ import { info as infoActions } from "../actions";
 class Info extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      info: {
-        name: "loading",
-        overview: "loading",
-        backdrop_path: ""
-      },
-      trailer: "loading",
-      cast: [],
-      crew: [],
-      seasons: [],
-    }
+    this.lastTmdbId = null;
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     const { itemInfo, tmdb } = this.props;
-    if (!tmdb.action) {
+    console.log(this.props);
+    if (itemInfo.tmdbId != this.lastTmdbId) {
+      this.lastTmdbId = itemInfo.tmdbId;
       this.props.dispatch(infoActions.request(itemInfo.tmdbId, itemInfo.type));
     }
   }
 
   render() {
-    const infoLists = [<InfoList key="cast" cast={this.state.cast} title="cast"></InfoList>, <InfoList key="crew" crew={this.state.crew} title="crew"></InfoList>];
-    if (this.state.seasons) {
-      infoLists.unshift(<InfoList key="seasons" seasons={this.state.seasons} title="seasons"></InfoList>);
-    }
-    return (
-      <div className="info infoClosed">
+
+    const { itemInfo, tmdb } = this.props;
+
+    if (tmdb.action === "INFO_REQUEST_SUCCES") {
+
+      const infoLists = [<InfoList key="cast" cast={tmdb.cast} title="cast"></InfoList>,
+                         <InfoList key="crew" crew={tmdb.crew} title="crew"></InfoList>];
+      if (tmdb.seasons) {
+        infoLists.unshift(<InfoList key="seasons" seasons={tmdb.seasons} title="seasons"></InfoList>);
+      }
+
+      return (
+        <div className="info">
         <div className="bgWrapper">
-          <FadedBackground src={this.state.info.backdrop_path} alt={this.props.itemInfo.title}></FadedBackground>
-          <h1>{this.props.itemInfo.title}</h1>
-          <p>{this.state.info.overview}</p>
-          <TrailerButton trailer={this.state.trailer}></TrailerButton>
+        <FadedBackground src={tmdb.details.backdrop_path} alt={itemInfo.title}></FadedBackground>
+        <h1>{itemInfo.title}</h1>
+        <p>{tmdb.details.overview}</p>
+        <TrailerButton trailer={tmdb.trailer}></TrailerButton>
         </div>
-        {infoLists}
-      </div>);
+          {infoLists}
+        </div>);
+
+    } else if (tmdb.action === "INFO_REQUEST_START") {
+      return (
+        <div className="info">
+          <h1>loading...</h1>
+        </div>
+      );
+    } else if (tmdb.action === "INFO_REQUEST_FAIL") {
+      return (
+        <div className="info">
+          <h1>failed to retrieve data</h1>
+          <p>please check if you have an internet connection, if you have check if this site is up <a href="https://www.themoviedb.org/">here</a></p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="info infoClosed"></div>
+      );
+    }
   }
 }
 
 export default connect((state) => {
-  console.log(state);
   return {
     itemInfo: state.info,
     tmdb: state.tmdb

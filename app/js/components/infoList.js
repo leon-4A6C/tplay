@@ -33,7 +33,7 @@ class SeasonsItem extends React.Component {
   render() {
     return (
       <li>
-        <img src={`${profile_path}${this.props.data.poster_path}`}></img>
+        <img src={this.props.data.poster_path ? `${profile_path}${this.props.data.poster_path}` : ""}></img>
         <h3>{this.props.data.season_number == 0 ? "specials" : "season " + this.props.data.season_number}</h3>
       </li>
     )
@@ -47,7 +47,7 @@ class CastItem extends React.Component {
   render() {
     return (
       <li>
-        <img src={`${profile_path}${this.props.data.profile_path}`}></img>
+        <img src={this.props.data.profile_path ? `${profile_path}${this.props.data.profile_path}` : ""}></img>
         <h3>{this.props.data.name}</h3>
         <h6>{this.props.data.character}</h6>
       </li>
@@ -62,7 +62,7 @@ class CrewItem extends React.Component {
   render() {
     return (
       <li>
-        <img src={`${profile_path}${this.props.data.profile_path}`}></img>
+        <img src={this.props.data.profile_path ? `${profile_path}${this.props.data.profile_path}` : ""}></img>
         <h3>{this.props.data.name}</h3>
         <h6>{this.props.data.job}</h6>
       </li>
