@@ -19,9 +19,9 @@ class Player extends React.Component {
       return (
         <div className="player">
           <div onClick={this.closePlayer.bind(this)} className="close">X</div>
-          <iframe id="ytplayer" type="text/html" width="640" height="360"
-                  src={`https://www.youtube.com/embed/${player.trailer}?autoplay=1&fs=1`}
-                  frameBorder="0">
+          <iframe id="ytplayer"
+                  src={`https://www.youtube.com/embed/${player.trailer}?rel=0&autoplay=1`}
+                  frameBorder="0" allowfullscreen>
           </iframe>
         </div>
       );
