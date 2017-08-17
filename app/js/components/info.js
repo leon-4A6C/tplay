@@ -25,10 +25,15 @@ class Info extends React.Component {
 
     if (tmdb.action === "INFO_REQUEST_SUCCES") {
 
-      const infoLists = [<InfoList key="cast" cast={tmdb.cast} title="cast"></InfoList>,
-                         <InfoList key="crew" crew={tmdb.crew} title="crew"></InfoList>];
+      const infoLists = [];
       if (tmdb.seasons) {
-        infoLists.unshift(<InfoList key="seasons" seasons={tmdb.seasons} title="seasons"></InfoList>);
+        infoLists.push(<InfoList key="seasons" seasons={tmdb.seasons} title="seasons"></InfoList>);
+      }
+      if (tmdb.cast.length > 0) {
+        infoLists.push(<InfoList key="cast" cast={tmdb.cast} title="cast"></InfoList>);
+      }
+      if (tmdb.crew.length > 0) {
+        infoLists.push(<InfoList key="crew" crew={tmdb.crew} title="crew"></InfoList>);
       }
 
       return (

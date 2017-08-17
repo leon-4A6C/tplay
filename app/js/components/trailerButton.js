@@ -14,7 +14,7 @@ export default class TrailerButton extends React.Component {
 
   render() {
     return (
-      <button onClick={this.playTrailer} className="trailerButton" type="button" name="button">
+      <button disabled={this.props.trailer ? false : true} onClick={this.playTrailer} className="trailerButton" type="button" name="button">
         <span className="fa fa-play"></span>
         {`\ttrailer`}
       </button>
