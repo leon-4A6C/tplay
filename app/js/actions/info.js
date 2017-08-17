@@ -21,23 +21,20 @@ export function request(tmdbId, type) {
     } else {
       throw new Error("Wrong type!, only movies and tv allowed");
     }
-    Promise.all([
-      tmdb[type].details({}, tmdbOption),
-      tmdb[type].videos({}, tmdbOption),
-      tmdb[type].credits({}, tmdbOption)
-    ]).then(info => {
-      dispatch({
-        type: "INFO_REQUEST_SUCCES",
-        payload: {
-          details: info[0],
-          videos: info[1],
-          credits: info[2],
-          trailer: getTrailer(info[1].results),
-          cast: info[2].cast,
-          crew: info[2].crew,
-          seasons: info[0].seasons
-        }
-      });
-    }).catch(e => dispatch({type: "INFO_REQUEST_FAIL", payload: {error: e}}));
+    tmdb[type].details({append_to_response: "videos,credits"}, tmdbOption)
+      .then(details => {
+        dispatch({
+          type: "INFO_REQUEST_SUCCES",
+          payload: {
+            details: details,
+            videos: details.videos,
+            credits: details.credits,
+            trailer: getTrailer(details.videos.results),
+            cast: details.credits.cast,
+            crew: details.credits.crew,
+            seasons: details.seasons
+          }
+        });
+      }).catch(e => dispatch({type: "INFO_REQUEST_FAIL", payload: {error: e}}));
   }
 }

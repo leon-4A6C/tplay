@@ -38,7 +38,7 @@ class Page extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.page.page != this.props.page.page) {
       let newItems = [...this.props.page.results]
-                    .map((x) => (<Item type={this.props.type} src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>));
+                        .map((x) => (<Item type={this.props.type} src={x.poster_path} key={x.id} tmdbId={x.id} name={x.name || x.title}></Item>));
       this.items = [...this.items, newItems];
     }
   }
