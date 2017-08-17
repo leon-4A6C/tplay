@@ -10,6 +10,9 @@ export default function reducer(state = {}, action) {
     case "INFO_REQUEST_FAIL":
       return {...state, ...action.payload, action: action.type}
       break;
+    case "INFO_CLOSE":
+      return {...state, action: action.type}
+      break;
 
     default:
       return {...state}

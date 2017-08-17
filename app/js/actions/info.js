@@ -38,3 +38,9 @@ export function request(tmdbId, type) {
       }).catch(e => dispatch({type: "INFO_REQUEST_FAIL", payload: {error: e}}));
   }
 }
+
+export function close() {
+  return {
+    type: "INFO_CLOSE"
+  }
+}

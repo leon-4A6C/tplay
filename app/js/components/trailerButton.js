@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { trailer } from "../actions";
+import { player } from "../actions";
 
 class TrailerButton extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class TrailerButton extends React.Component {
   }
 
   playTrailer(e) {
-    this.props.dispatch(trailer.play(this.props.trailer));
+    this.props.dispatch(player.play(this.props.trailer));
   }
 
   render() {

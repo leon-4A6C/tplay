@@ -1,16 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { player } from "../actions";
+
 class Player extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  closePlayer() {
+    this.props.dispatch(player.close());
+  }
+
   render() {
     const { player } = this.props;
     if (player.action === "PLAYER_PLAY_TRAILER") {
       // TODO: make a custom video player for yt vids
       return (
         <div className="player">
+          <div onClick={this.closePlayer.bind(this)} className="close">X</div>
           <iframe id="ytplayer" type="text/html" width="640" height="360"
                   src={`https://www.youtube.com/embed/${player.trailer}?autoplay=1&fs=1`}
                   frameBorder="0">
