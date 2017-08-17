@@ -9,6 +9,6 @@ export default function reducer(state = {
       break;
 
     default:
-      return {...state, type: action.type}
+      return {...state}
   }
 }

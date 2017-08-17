@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { connect } from "react-redux";
 
-export default class TrailerButton extends React.Component {
+import { trailer } from "../actions";
+
+class TrailerButton extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,7 +11,7 @@ export default class TrailerButton extends React.Component {
   }
 
   playTrailer(e) {
-    console.log("play trailer: " + this.props.trailer);
+    this.props.dispatch(trailer.play(this.props.trailer));
   }
 
   render() {
@@ -21,3 +23,5 @@ export default class TrailerButton extends React.Component {
     )
   }
 }
+
+export default connect()(TrailerButton);
