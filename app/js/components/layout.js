@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Info from "./info.js";
+import MainInfo from "./mainInfo.js";
 import Page from "./page.js";
 // import Settings from "./settings.js";
 // import Nav from "./nav.js";
@@ -23,7 +23,7 @@ export default class Layout extends React.Component {
         <main>
           {this.state.pages}
         </main>
-        <Info></Info>
+        <MainInfo></MainInfo>
         <Player></Player>
       </div>
     )
